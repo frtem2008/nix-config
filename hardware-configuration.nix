@@ -17,7 +17,6 @@
     };
   };
 
-
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/cc979b59-5595-4597-9e48-b0595d124789";
       fsType = "ext4";
@@ -32,6 +31,24 @@
   swapDevices =
     [ { device = "/dev/disk/by-uuid/323675fe-9a36-4c38-bab1-89ea2522d377"; }
     ];
+
+
+  ### SOUND ###
+  # Disable Pulseaudio in flawor of Pipewire
+  services.pulseaudio.enable = false;
+
+  # Enable bluetooth
+  hardware.bluetooth = {
+    enable = true; # enables support for Bluetooth
+    powerOnBoot = true; # powers up the default Bluetooth controller on boot
+    settings = {
+      General = {
+        Enable = "Source,Sink,Media,Socket";
+        Experimental = true; 
+      };
+    };
+  };
+   
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's

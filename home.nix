@@ -75,7 +75,7 @@ rec
     pciutils # lspci
     usbutils # lsusb
 
-    nano
+    ggh # better ssh
   ];
 
   # basic configuration of git, please change to your own
@@ -107,9 +107,10 @@ rec
 
     # set some aliases, feel free to add more or remove some
     shellAliases = {
+      ssh = "ggh";
       r = "sudo nixos-rebuild switch";
       rdb = "sudo nixos-rebuild switch --show-trace --print-build-logs --verbose";
-      e = "sudo nano -i /etc/nixos/*"; /* for now */
+      e = "sudo nano /etc/nixos/*"; /* for now */
 #      urldecode = "python3 -c 'import sys, urllib.parse as ul; print(ul.unquote_plus(sys.stdin.read()))'";
 #      urlencode = "python3 -c 'import sys, urllib.parse as ul; print(ul.quote_plus(sys.stdin.read()))'";
 

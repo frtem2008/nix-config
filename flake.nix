@@ -8,6 +8,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     agenix.url = "github:ryantm/agenix";
+    sddm-stray.url = "github:Bqrry4/sddm-stray";
   };
 
   outputs = { self, nixpkgs, home-manager, agenix, ... }@inputs: {
@@ -25,8 +26,8 @@
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-	  home-manager.users.livefish = import ./home.nix;
-	}	
+	        home-manager.users.livefish = import ./home.nix;
+	      }	
 
         agenix.nixosModules.default
       ];

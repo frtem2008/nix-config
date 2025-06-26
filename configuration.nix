@@ -15,10 +15,20 @@
   services = {
     displayManager.sddm.enable = true;
     displayManager.sddm.wayland.enable = true;
+    pipewire = {
+      enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = true;
+      pulse.enable = true;
+      # If you want to use JACK applications, uncomment this
+      jack.enable = true;
+    };    
     ntp.enable = true;
     openssh.enable = true;
+    blueman.enable = true;
 #    dunst.enable = true;
   };
+  security.rtkit.enable = true; # For pipewire
 
   boot.loader.efi.canTouchEfiVariables = true;
 
@@ -43,7 +53,9 @@
       home = "/home/livefish";
       createHome = true;
   };
-  
+
+   networking.firewall.enable = false;
+   
   # https://search.nixos.org/packages
   environment.systemPackages = with pkgs; [
       vim
@@ -51,6 +63,7 @@
       btop
       git
       firefox
+      brave
       nix-prefetch-scripts
       which
       fastfetch
@@ -67,7 +80,12 @@
       wl-clipboard # Command-line copy/paste utilities for Wayland
       wofi
       bat
+      alsa-utils
+      pulseaudio
+      pavucontrol
+      
       inputs.agenix.packages."${system}".default
+      inputs.sddm-stray.packages.${pkgs.system}.default
   ];
 
   programs.nano.nanorc = ''

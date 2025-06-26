@@ -34,7 +34,7 @@
       # Path to the private key file.
       # privateKeyFile = "/etc/nixos/wireguard/client_private.key";
       privateKeyFile = config.age.secrets.wireguard-main.path;
-      
+      mtu = 1300;
       peers = [{
         publicKey = "y1IyAi61re9vucTKWFOY1qsWVmCCvDs2iXL1qNbsBDo=";
         allowedIPs = [ "0.0.0.0/0" "::/0"];
@@ -49,7 +49,7 @@
 
       # Path to the private key file.
       privateKeyFile = config.age.secrets.wireguard-main.path;
-      
+      listenPort = 51821;
       peers = [{
         publicKey = "47el/BtTAmXHRHbkCHcOotZUL71ywxDgDL5PBgobD0w=";
         allowedIPs = [ "10.0.0.0/24" ];
