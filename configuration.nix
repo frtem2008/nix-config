@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, inputs, ... }:
 
 {
   imports =
@@ -8,12 +8,15 @@
       ./services.nix
       ./nvidia.nix
       ./hyprland.nix
+      ./wireguard/wireguard.nix
+      ./shadowsocks/shadowsocks.nix
     ];
 
   services = {
     displayManager.sddm.enable = true;
     displayManager.sddm.wayland.enable = true;
     ntp.enable = true;
+    openssh.enable = true;
 #    dunst.enable = true;
   };
 
@@ -56,25 +59,34 @@
       killall
       alacritty
       kitty
-      wireguard-tools
-      shadowsocks-rust
       gnome-disk-utility
       home-manager
       lshw
-      wayland-utils # Wayland utilities
       ntp
+      wayland-utils # Wayland utilities
       wl-clipboard # Command-line copy/paste utilities for Wayland
       wofi
       bat
-#      dunst
+      inputs.agenix.packages."${system}".default
   ];
+
+  programs.nano.nanorc = ''
+      set tabstospaces
+      set tabsize 2
+      set autoindent
+      set indicator
+      set multibuffer
+      set magic # May consume time
+      set positionlog
+      set linenumbers
+    '';
 
   nix.gc = {
     automatic = true;
     dates = "weekly";
     options = "--delete-older-than 7d";
   };
-
+  nix.settings.auto-optimise-store = true;
   
   # Never modify!
   system.stateVersion = "25.05";

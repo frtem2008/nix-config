@@ -5,8 +5,15 @@ rec
   home.username = "livefish";
   home.homeDirectory = "/home/${home.username}";
 
+
+  # For hyprland (TODO: move to hyprland config)
+  wayland.windowManager.hyprland.enable = true; # enable Hyprland
+  wayland.windowManager.hyprland.systemd.enable = false;  
+
   # Packages that should be installed to the user profile.
   home.packages = with pkgs; [
+    telegram-desktop
+
     # here is some command line tools I use frequently
     # feel free to add your own or remove some of them
 
@@ -67,6 +74,8 @@ rec
     ethtool
     pciutils # lspci
     usbutils # lsusb
+
+    nano
   ];
 
   # basic configuration of git, please change to your own
@@ -100,12 +109,13 @@ rec
     shellAliases = {
       r = "sudo nixos-rebuild switch";
       rdb = "sudo nixos-rebuild switch --show-trace --print-build-logs --verbose";
-      e = "sudo nano /etc/nixos/configuration.nix";
+      e = "sudo nano -i /etc/nixos/*"; /* for now */
 #      urldecode = "python3 -c 'import sys, urllib.parse as ul; print(ul.unquote_plus(sys.stdin.read()))'";
 #      urlencode = "python3 -c 'import sys, urllib.parse as ul; print(ul.quote_plus(sys.stdin.read()))'";
+
     };
   };
-
+  
   # This value determines the home Manager release that your
   # configuration is compatible with. This helps avoid breakage
   # when a new home Manager release introduces backwards

@@ -6,12 +6,14 @@
     home-manager = {
       url = "github:nix-community/home-manager/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
-    }; 
+    };
+    agenix.url = "github:ryantm/agenix";
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }@inputs: {
+  outputs = { self, nixpkgs, home-manager, agenix, ... }@inputs: {
     nixosConfigurations.livefish-nix = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
+      specialArgs = { inherit inputs; };
       modules = [
         # Import the previous configuration.nix we used,
         # so the old configuration file still takes effect
@@ -25,6 +27,8 @@
           home-manager.useUserPackages = true;
 	  home-manager.users.livefish = import ./home.nix;
 	}	
+
+        agenix.nixosModules.default
       ];
     };
   };
