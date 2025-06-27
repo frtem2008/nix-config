@@ -102,7 +102,9 @@ rec
     enableCompletion = true;
     # TODO add your custom bashrc here
     bashrcExtra = ''
+      fastfetch
       export PATH="$PATH:$HOME/bin:$HOME/.local/bin:$HOME/go/bin"
+      ___MY_VMOPTIONS_SHELL_FILE="''${HOME}/.jetbrains.vmoptions.sh"; if [ -f "''${___MY_VMOPTIONS_SHELL_FILE}" ]; then . "''${___MY_VMOPTIONS_SHELL_FILE}"; fi
     '';
 
     # set some aliases, feel free to add more or remove some

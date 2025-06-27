@@ -10,11 +10,10 @@
       ./hyprland.nix
       ./wireguard/wireguard.nix
       ./shadowsocks/shadowsocks.nix
+      ./sddm/sddm.nix
     ];
 
   services = {
-    displayManager.sddm.enable = true;
-    displayManager.sddm.wayland.enable = true;
     pipewire = {
       enable = true;
       alsa.enable = true;
@@ -54,7 +53,7 @@
       createHome = true;
   };
 
-   networking.firewall.enable = false;
+  networking.firewall.enable = false;
    
   # https://search.nixos.org/packages
   environment.systemPackages = with pkgs; [
@@ -63,7 +62,6 @@
       btop
       git
       firefox
-      brave
       nix-prefetch-scripts
       which
       fastfetch
@@ -84,10 +82,15 @@
       pulseaudio
       pavucontrol
       
+      jetbrains-toolbox
+      icu # For Clion
+      gcc
+      go
+      
       inputs.agenix.packages."${system}".default
       inputs.sddm-stray.packages.${pkgs.system}.default
   ];
-
+  
   programs.nano.nanorc = ''
       set tabstospaces
       set tabsize 2
