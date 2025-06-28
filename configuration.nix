@@ -7,7 +7,7 @@
       ./grub.nix
       ./services.nix
       ./nvidia.nix
-      ./hyprland.nix
+      ./hyprland/hyprland.nix
       ./wireguard/wireguard.nix
       ./shadowsocks/shadowsocks.nix
       ./sddm/sddm.nix

@@ -5,11 +5,6 @@ rec
   home.username = "livefish";
   home.homeDirectory = "/home/${home.username}";
 
-
-  # For hyprland (TODO: move to hyprland config)
-  wayland.windowManager.hyprland.enable = true; # enable Hyprland
-  wayland.windowManager.hyprland.systemd.enable = false;  
-
   # Packages that should be installed to the user profile.
   home.packages = with pkgs; [
     telegram-desktop
@@ -76,11 +71,13 @@ rec
     usbutils # lsusb
     libreoffice
 
-    obs-studio
-    
     ggh # better ssh
+
+    tldr
+
+    obs-studio    
   ];
-   
+  
   # basic configuration of git, please change to your own
   programs.git = {
     enable = true;
@@ -120,6 +117,13 @@ rec
 #      urlencode = "python3 -c 'import sys, urllib.parse as ul; print(ul.quote_plus(sys.stdin.read()))'";
 
     };
+  };
+
+  # For hyprland 
+  wayland.windowManager.hyprland.enable = true; # enable Hyprland
+  wayland.windowManager.hyprland.systemd.enable = false;  
+  home.file."${home.homeDirectory}/.config/hypr/hyprland.conf" = {
+    source = ./hyprland/hyprland.conf;
   };
   
   # This value determines the home Manager release that your
