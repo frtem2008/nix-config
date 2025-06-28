@@ -15,20 +15,39 @@
     ];
 
   services = {
-    pipewire = {
-      enable = true;
-      alsa.enable = true;
-      alsa.support32Bit = true;
-      pulse.enable = true;
-      # If you want to use JACK applications, uncomment this
-      jack.enable = true;
-    };    
     ntp.enable = true;
     openssh.enable = true;
     blueman.enable = true;
-#    dunst.enable = true;
+#   dunst.enable = true;
   };
-  security.rtkit.enable = true; # For pipewire
+
+  ### SOUND ###
+  hardware.pulseaudio.enable = false; # Use Pipewire, the modern sound subsystem
+  security.rtkit.enable = true; # Enable RealtimeKit for audio purposes
+
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+    # Uncomment the following line if you want to use JACK applications
+    # jack.enable = true;
+  };
+
+  # Enable bluetooth
+  hardware.bluetooth = {
+    enable = true; # enables support for Bluetooth
+    powerOnBoot = true; # powers up the default Bluetooth controller on boot
+    settings = {
+      General = {
+        Enable = "Source,Sink,Media,Socket";
+        Experimental = true; 
+      };
+    };
+  };
+
+
+  programs.amnezia-vpn.enable = true;
 
   boot.loader.efi.canTouchEfiVariables = true;
 
@@ -79,10 +98,17 @@
       wl-clipboard # Command-line copy/paste utilities for Wayland
       wofi
       bat
-      alsa-utils
-      pulseaudio
-      pavucontrol
+      vlc
 
+      # Sound
+      alsa-utils
+      pavucontrol
+      pamixer
+      bluez
+      bluez-tools
+      
+      amnezia-vpn
+      
       inputs.agenix.packages."${system}".default
       inputs.sddm-stray.packages.${pkgs.system}.default
   ];

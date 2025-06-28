@@ -4,9 +4,15 @@
   environment.systemPackages = with pkgs; [
     jetbrains-toolbox
     icu # For Clion
+ 
     gcc
     go
+ 
     glib # For pycharm
+    python3
+
+    jdk
+    
  ];
        
  # To launch apps without the toolbox app
