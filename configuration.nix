@@ -11,6 +11,7 @@
       ./wireguard/wireguard.nix
       ./shadowsocks/shadowsocks.nix
       ./sddm/sddm.nix
+      ./jetbrains/jetbrains.nix
     ];
 
   services = {
@@ -81,12 +82,7 @@
       alsa-utils
       pulseaudio
       pavucontrol
-      
-      jetbrains-toolbox
-      icu # For Clion
-      gcc
-      go
-      
+
       inputs.agenix.packages."${system}".default
       inputs.sddm-stray.packages.${pkgs.system}.default
   ];
@@ -112,4 +108,3 @@
   # Never modify!
   system.stateVersion = "25.05";
 }
-
