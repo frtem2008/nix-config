@@ -76,6 +76,7 @@ rec
     tldr
 
     obs-studio    
+    yandex-music
   ];
   
   # basic configuration of git, please change to your own
@@ -122,9 +123,9 @@ rec
   # For hyprland 
   wayland.windowManager.hyprland.enable = true; # enable Hyprland
   wayland.windowManager.hyprland.systemd.enable = false;  
-  home.file."${home.homeDirectory}/.config/hypr/hyprland.conf" = {
-    source = ./hyprland/hyprland.conf;
-  };
+#  home.file."${home.homeDirectory}/.config/hypr/hyprland.conf" = {
+#    source = ./hyprland/hyprland.conf;
+#  };
   
   # This value determines the home Manager release that your
   # configuration is compatible with. This helps avoid breakage

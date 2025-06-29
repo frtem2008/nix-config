@@ -20,6 +20,7 @@
     blueman.enable = true;
 #   dunst.enable = true;
   };
+  security.polkit.enable = true;
 
   ### SOUND ###
   hardware.pulseaudio.enable = false; # Use Pipewire, the modern sound subsystem
@@ -99,14 +100,21 @@
       wofi
       bat
       vlc
+      qimgv # Image viewer
 
+      gparted 
+      polkit
+      
       # Sound
       alsa-utils
       pavucontrol
       pamixer
       bluez
       bluez-tools
-      
+
+      btrfs-progs
+      hyprpolkitagent
+
       amnezia-vpn
       
       inputs.agenix.packages."${system}".default
