@@ -18,6 +18,7 @@
     ntp.enable = true;
     openssh.enable = true;
     blueman.enable = true;
+    udisks2.enable = true;
 #   dunst.enable = true;
   };
   security.polkit.enable = true;
@@ -92,6 +93,8 @@
       alacritty
       kitty
       gnome-disk-utility
+      ncdu
+      cryptsetup
       home-manager
       lshw
       ntp
