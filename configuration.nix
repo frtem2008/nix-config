@@ -99,6 +99,7 @@
       lshw
       ntp
       wayland-utils # Wayland utilities
+      vulkan-tools
       wl-clipboard # Command-line copy/paste utilities for Wayland
       wofi
       bat
@@ -119,9 +120,12 @@
       hyprpolkitagent
 
       amnezia-vpn
+
+      hardinfo2
       
       inputs.agenix.packages."${system}".default
       inputs.sddm-stray.packages.${pkgs.system}.default
+      inputs.prismlauncher-cracked.packages."${system}".default
   ];
   
   programs.nano.nanorc = ''

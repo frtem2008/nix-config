@@ -77,6 +77,7 @@ rec
 
     obs-studio    
     yandex-music
+    anydesk
   ];
   
   # basic configuration of git, please change to your own

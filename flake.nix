@@ -9,9 +9,17 @@
     };
     agenix.url = "github:ryantm/agenix";
     sddm-stray.url = "github:Bqrry4/sddm-stray";
+    prismlauncher-cracked.url = "github:Diegiwg/PrismLauncher-Cracked";
   };
 
-  outputs = { self, nixpkgs, home-manager, agenix, ... }@inputs: {
+  outputs = { 
+    self, nixpkgs, 
+    home-manager, 
+    agenix, 
+    prismlauncher-cracked,
+    
+    ... 
+  }@inputs: {
     nixosConfigurations.livefish-nix = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       specialArgs = { inherit inputs; };
@@ -30,6 +38,7 @@
 	      }	
 
         agenix.nixosModules.default
+#        prismlauncher-cracked.nixosModules.default
       ];
     };
   };
