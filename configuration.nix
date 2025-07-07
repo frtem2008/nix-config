@@ -25,7 +25,7 @@
   security.polkit.enable = true;
 
   ### SOUND ###
-  hardware.pulseaudio.enable = false; # Use Pipewire, the modern sound subsystem
+  services.pulseaudio.enable = false; # Use Pipewire, the modern sound subsystem
   security.rtkit.enable = true; # Enable RealtimeKit for audio purposes
 
   services.pipewire = {
@@ -130,6 +130,17 @@
       inputs.sddm-stray.packages.${pkgs.system}.default
       inputs.prismlauncher-cracked.packages."${system}".default
   ];
+  
+  fonts.enableDefaultPackages = true; # Basic unicode coverage
+  fonts.packages = builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
+#  fonts.packages = with pkgs; [
+#    # All nerd fonts
+#    builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts)
+#    noto-fonts
+#    noto-fonts-cjk-sans
+#    noto-fonts-emoji
+#    liberation_ttf  
+#   ];
   
   programs.nano.nanorc = ''
       set tabstospaces

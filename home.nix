@@ -88,14 +88,26 @@ rec
   };
 
   # alacritty - a cross-platform, GPU-accelerated terminal emulator
-  programs.alacritty = {
+  programs.alacritty = { 
     enable = true;
-    # custom settings
     settings = {
       env.TERM = "xterm-256color";
+
       font = {
-        size = 11;
-      };
+				normal = {
+					family = "JetBrains Mono Nerd Font";
+					style = "Regular";
+				};
+				bold = {
+					family = "JetBrains Mono Nerd Font";
+					style = "Bold";
+				};
+				italic = {
+					family = "JetBrains Mono Nerd Font";
+					style = "Italic";
+				};
+				size = 11;
+			};
     };
   };
 
