@@ -19,6 +19,7 @@
     openssh.enable = true;
     blueman.enable = true;
     udisks2.enable = true;
+    kmscon.enable = true;
 #   dunst.enable = true;
   };
   security.polkit.enable = true;
@@ -52,6 +53,7 @@
   programs.amnezia-vpn.enable = true;
 
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.blacklistedKernelModules = [ "nouveau" ]; 
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   
@@ -96,6 +98,7 @@
       ncdu
       cryptsetup
       home-manager
+      kmscon # KMS console instead of agetty
       lshw
       ntp
       wayland-utils # Wayland utilities
