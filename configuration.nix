@@ -125,6 +125,11 @@
       amnezia-vpn
 
       hardinfo2
+
+      kdePackages.dolphin
+      kdePackages.qtsvg # Dolphin svg icons support
+      kdePackages.kio-fuse #to mount remote filesystems via FUSE
+      kdePackages.kio-extras #extra protocols support (sftp, fish and more)
       
       inputs.agenix.packages."${system}".default
       inputs.sddm-stray.packages.${pkgs.system}.default

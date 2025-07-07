@@ -1,5 +1,28 @@
-{ config, pkgs, ... }:
-rec
+{ config, lib, pkgs, ... }:
+let
+  browser = [ "firefox.desktop" ];
+  associations = {
+    "text/html" = browser;
+    "x-scheme-handler/http" = browser;
+    "x-scheme-handler/https" = browser;
+    "x-scheme-handler/ftp" = browser;
+    "x-scheme-handler/chrome" = browser;
+    "x-scheme-handler/about" = browser;
+    "x-scheme-handler/unknown" = browser;
+    "application/x-extension-htm" = browser;
+    "application/x-extension-html" = browser;
+    "application/x-extension-shtml" = browser;
+    "application/xhtml+xml" = browser;
+    "application/x-extension-xhtml" = browser;
+    "application/x-extension-xht" = browser;
+    "image/*" = [ "qimgv.desktop" ]; # */
+
+    "audio/*" = [ "vlc.desktop" ]; # */
+    "video/*" = [ "vlc.dekstop" ]; # */ 
+    "application/json" = browser; # ".json"  JSON format
+    "application/pdf" = browser; # ".pdf"  Adobe Portable Document Format (PDF)
+  };
+in rec
 {
   # TODO please change the username & home directory to your own
   home.username = "livefish";
@@ -78,6 +101,7 @@ rec
     obs-studio    
     yandex-music
     anydesk
+    keepassxc
   ];
   
   # basic configuration of git, please change to your own
@@ -133,6 +157,12 @@ rec
     };
   };
 
+  xdg.mimeApps.enable = lib.mkDefault true;
+  xdg.configFile."mimeapps.list" = lib.mkIf config.xdg.mimeApps.enable { force = true; };
+  xdg.mimeApps.associations.added = associations;
+  xdg.mimeApps.defaultApplications = associations;
+
+#  fonts.fontconfig.enable = true;
   # For hyprland 
   wayland.windowManager.hyprland.enable = true; # enable Hyprland
   wayland.windowManager.hyprland.systemd.enable = false;  
