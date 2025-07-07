@@ -109,6 +109,8 @@
       vlc
       qimgv # Image viewer
 
+      xdg-terminal-exec
+            
       gparted 
       polkit
       

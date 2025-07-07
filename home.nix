@@ -115,7 +115,7 @@ in rec
   programs.alacritty = { 
     enable = true;
     settings = {
-      env.TERM = "xterm-256color";
+      env.TERM = "alacritty";
 
       font = {
 				normal = {
@@ -161,7 +161,7 @@ in rec
   xdg.configFile."mimeapps.list" = lib.mkIf config.xdg.mimeApps.enable { force = true; };
   xdg.mimeApps.associations.added = associations;
   xdg.mimeApps.defaultApplications = associations;
-
+  
 #  fonts.fontconfig.enable = true;
   # For hyprland 
   wayland.windowManager.hyprland.enable = true; # enable Hyprland
