@@ -51,6 +51,15 @@
 
 
   programs.amnezia-vpn.enable = true;
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+    localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
+  };
+  # For games, distributed via AppImage https://nixos.wiki/wiki/Steam
+  programs.appimage.enable = true;
+  programs.appimage.binfmt = true;
 
   boot.loader.efi.canTouchEfiVariables = true;
   boot.blacklistedKernelModules = [ "nouveau" ]; 
@@ -128,6 +137,9 @@
 
       hardinfo2
 
+      undetected-chromedriver
+      chromium
+      
       kdePackages.dolphin
       kdePackages.qtsvg # Dolphin svg icons support
       kdePackages.kio-fuse #to mount remote filesystems via FUSE
