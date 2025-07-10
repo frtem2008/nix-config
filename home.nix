@@ -165,7 +165,8 @@ in rec
 #  fonts.fontconfig.enable = true;
   # For hyprland 
   wayland.windowManager.hyprland.enable = true; # enable Hyprland
-  wayland.windowManager.hyprland.systemd.enable = false;  
+  wayland.windowManager.hyprland.systemd.enable = false;
+
 #  home.file."${home.homeDirectory}/.config/hypr/hyprland.conf" = {
 #    source = ./hyprland/hyprland.conf;
 #  };
