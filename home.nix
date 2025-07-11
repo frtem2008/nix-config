@@ -148,7 +148,7 @@ in rec
     # set some aliases, feel free to add more or remove some
     shellAliases = {
       ssh = "ggh";
-      r = "sudo nixos-rebuild switch";
+      r = "sudo nixos-rebuild switch --flake /home/livefish/nixos-config#livefish-nix";
       rdb = "sudo nixos-rebuild switch --show-trace --print-build-logs --verbose";
       e = "sudo nano /etc/nixos/*"; /* for now */
 #      urldecode = "python3 -c 'import sys, urllib.parse as ul; print(ul.unquote_plus(sys.stdin.read()))'";

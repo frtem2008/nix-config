@@ -19,10 +19,13 @@
     openssh.enable = true;
     blueman.enable = true;
     udisks2.enable = true;
-    kmscon.enable = true;
+#   kmscon.enable = true;
 #   dunst.enable = true;
   };
   security.polkit.enable = true;
+
+  console.enable = true;
+#  systemd.services."getty@tty1".enabled = true;
 
   ### SOUND ###
   services.pulseaudio.enable = false; # Use Pipewire, the modern sound subsystem
@@ -64,9 +67,37 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.blacklistedKernelModules = [ "nouveau" ]; 
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  
   boot.kernelPackages = pkgs.linuxPackages_latest;
+  
+  boot = {
+    plymouth = {
+      enable = true;
+      theme = "rings";
+      themePackages = with pkgs; [
+        # By default we would install all themes
+        (adi1090x-plymouth-themes.override {
+          selected_themes = [ "rings" ];
+        })
+      ];
+    };
+
+    # Enable "Silent boot"
+    consoleLogLevel = 3;
+    initrd.verbose = false;
+    kernelParams = [
+      "quiet"
+      "splash"
+      "boot.shell_on_fail"
+      "udev.log_priority=3"
+      "rd.systemd.show_status=auto"
+    ];
+    # Hide the OS choice for bootloaders.
+    # It's still possible to open the bootloader list by pressing any key
+    # It will just not appear on screen unless a key is pressed
+    loader.timeout = 0;
+  };
+
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   networking.hostName = "livefish-nix"; # Define your hostname.
   networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
@@ -105,6 +136,7 @@
       kitty
       gnome-disk-utility
       ncdu
+      duf
       cryptsetup
       home-manager
       kmscon # KMS console instead of agetty
@@ -127,6 +159,7 @@
       alsa-utils
       pavucontrol
       pamixer
+      qpwgraph
       bluez
       bluez-tools
 
