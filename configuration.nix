@@ -166,6 +166,8 @@
       btrfs-progs
       hyprpolkitagent
 
+      fluffychat
+    
       amnezia-vpn
 
       hardinfo2
@@ -181,6 +183,11 @@
       inputs.agenix.packages."${system}".default
       inputs.sddm-stray.packages.${pkgs.system}.default
       inputs.prismlauncher-cracked.packages."${system}".default
+  ]; 
+
+  nixpkgs.config.permittedInsecurePackages = [
+    "fluffychat-linux-1.27.0"
+    "olm-3.2.16"  
   ];
   
   fonts.enableDefaultPackages = true; # Basic unicode coverage
