@@ -28,10 +28,14 @@ in rec
   home.username = "livefish";
   home.homeDirectory = "/home/${home.username}";
 
+  imports = [
+    ./git
+  ];
+
   # Packages that should be installed to the user profile.
   home.packages = with pkgs; [
     telegram-desktop
-
+        
     # here is some command line tools I use frequently
     # feel free to add your own or remove some of them
 
@@ -103,13 +107,6 @@ in rec
     anydesk
     keepassxc
   ];
-  
-  # basic configuration of git, please change to your own
-  programs.git = {
-    enable = true;
-    userName = "livefish";
-    userEmail = "ungazhiv2008@yandex.ru";
-  };
 
   # alacritty - a cross-platform, GPU-accelerated terminal emulator
   programs.alacritty = { 
@@ -140,7 +137,10 @@ in rec
     enableCompletion = true;
     # TODO add your custom bashrc here
     bashrcExtra = ''
-      fastfetch
+      if [[ $- == *i* ]]
+      then
+        fastfetch
+      fi
       export PATH="$PATH:$HOME/bin:$HOME/.local/bin:$HOME/go/bin"
       ___MY_VMOPTIONS_SHELL_FILE="''${HOME}/.jetbrains.vmoptions.sh"; if [ -f "''${___MY_VMOPTIONS_SHELL_FILE}" ]; then . "''${___MY_VMOPTIONS_SHELL_FILE}"; fi
     '';
@@ -151,6 +151,7 @@ in rec
       r = "sudo nixos-rebuild switch --flake /home/livefish/nixos-config#livefish-nix";
       rdb = "sudo nixos-rebuild switch --show-trace --print-build-logs --verbose";
       e = "sudo nano /etc/nixos/*"; /* for now */
+      logs = "journalctl -n 100 -f";
 #      urldecode = "python3 -c 'import sys, urllib.parse as ul; print(ul.unquote_plus(sys.stdin.read()))'";
 #      urlencode = "python3 -c 'import sys, urllib.parse as ul; print(ul.quote_plus(sys.stdin.read()))'";
 

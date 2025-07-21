@@ -6,6 +6,8 @@
     icu # For Clion
  
     gcc
+    ninja
+    
     go
  
     glib # For pycharm

@@ -10,6 +10,10 @@
     agenix.url = "github:ryantm/agenix";
     sddm-stray.url = "github:Bqrry4/sddm-stray";
     prismlauncher-cracked.url = "github:Diegiwg/PrismLauncher-Cracked";
+    compose2nix = {
+      url = "github:aksiksi/compose2nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { 
@@ -17,7 +21,7 @@
     home-manager, 
     agenix, 
     prismlauncher-cracked,
-    
+    compose2nix,
     ... 
   }@inputs: {
     nixosConfigurations.livefish-nix = nixpkgs.lib.nixosSystem {

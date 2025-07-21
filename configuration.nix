@@ -12,6 +12,7 @@
       ./shadowsocks/shadowsocks.nix
       ./sddm/sddm.nix
       ./jetbrains/jetbrains.nix
+      ./docker/docker-compose.nix
     ];
 
   services = {
@@ -80,16 +81,40 @@
   system.autoUpgrade.enable = true;
   system.autoUpgrade.allowReboot = true;
 
+  fileSystems."/mnt/data" = {
+    device = "/dev/disk/by-uuid/01DA53C6EF18F070";
+  };
+
 #  system.copySystemConfiguration = true;
 
   users.users.livefish = {
       isNormalUser = true;
-      extraGroups = [ "wheel" "video" "audio" "disk" "networkmanager"];
+      extraGroups = [ "wheel" "video" "audio" "disk" "networkmanager" ];
       home = "/home/livefish";
       createHome = true;
   };
 
-  networking.firewall.enable = false;
+  networking.firewall = {
+    enable = false;
+    allowedTCPPorts = [
+      3003  # Immich ml
+      51821 # Wireguard
+    ];
+  };
+#
+#  virtualisation.docker = {
+#    enable = true;
+#    enableNvidia = true;
+#    rootless = {
+#      enable = true;
+#      setSocketVariable = true;
+#      # Optionally customize rootless Docker daemon settings
+#      daemon.settings = {
+#        dns = [ "1.1.1.1" "8.8.8.8" ];
+#      };
+#    };
+#  };
+  hardware.nvidia-container-toolkit.enable = true;
    
   # https://search.nixos.org/packages
   environment.systemPackages = with pkgs; [
@@ -110,6 +135,7 @@
       ncdu
       duf
       cryptsetup
+      ntfs3g
       home-manager
       kmscon # KMS console instead of agetty
       lshw
@@ -153,8 +179,9 @@
 
       undetected-chromedriver
       chromium
-      
+
       kdePackages.dolphin
+      kdePackages.ark      
       kdePackages.qtsvg # Dolphin svg icons support
       kdePackages.kio-fuse #to mount remote filesystems via FUSE
       kdePackages.kio-extras #extra protocols support (sftp, fish and more)
@@ -162,6 +189,7 @@
       inputs.agenix.packages."${system}".default
       inputs.sddm-stray.packages.${pkgs.system}.default
       inputs.prismlauncher-cracked.packages."${system}".default
+      inputs.compose2nix.packages.${system}.default
   ]; 
 
   nixpkgs.config.permittedInsecurePackages = [
