@@ -164,8 +164,6 @@
       btrfs-progs
       hyprpolkitagent
 
-      fluffychat
-    
       amnezia-vpn
 
       # Epic games
@@ -195,6 +193,7 @@
   nixpkgs.config.permittedInsecurePackages = [
     "fluffychat-linux-1.27.0"
     "olm-3.2.16"  
+    "electron-34.5.8"
   ];
   
   fonts.enableDefaultPackages = true; # Basic unicode coverage

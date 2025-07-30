@@ -7,8 +7,14 @@
  
     gcc
     ninja
+    gnumake
     
     go
+
+    # gRPC
+    protobuf
+    go-protobuf
+    protoc-gen-go-grpc
  
     glib # For pycharm
     python3

@@ -15,10 +15,15 @@ let
     "application/xhtml+xml" = browser;
     "application/x-extension-xhtml" = browser;
     "application/x-extension-xht" = browser;
-    "image/*" = [ "qimgv.desktop" ]; # */
 
-    "audio/*" = [ "vlc.desktop" ]; # */
-    "video/*" = [ "vlc.dekstop" ]; # */ 
+    "image/jpeg" = [ "qimgv.desktop" ];
+    "image/png" = [ "qimgv.desktop" ];
+    "image/gif" = [ "qimgv.desktop" ];
+    
+    "audio/mp3" = [ "vlc.desktop" ];
+    "audio/mp4" = [ "vlc.desktop" ];
+    "video/mp4" = [ "vlc.dekstop" ];
+
     "application/json" = browser; # ".json"  JSON format
     "application/pdf" = browser; # ".pdf"  Adobe Portable Document Format (PDF)
   };
@@ -102,6 +107,11 @@ in rec
 
     tldr
 
+    fluffychat
+    deltachat-desktop
+
+    zoom-us
+  
     obs-studio    
     yandex-music
     anydesk
@@ -158,12 +168,14 @@ in rec
     };
   };
 
-  xdg.mimeApps.enable = lib.mkDefault true;
-  xdg.configFile."mimeapps.list" = lib.mkIf config.xdg.mimeApps.enable { force = true; };
-  xdg.mimeApps.associations.added = associations;
-  xdg.mimeApps.defaultApplications = associations;
+  xdg.mimeApps = {
+    enable = true;
+    associations.added = associations;
+    defaultApplications = associations;
+  };
   
-#  fonts.fontconfig.enable = true;
+  # fonts.fontconfig.enable = true;
+
   # For hyprland 
   wayland.windowManager.hyprland.enable = true; # enable Hyprland
   wayland.windowManager.hyprland.systemd.enable = false;
