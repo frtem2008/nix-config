@@ -20,7 +20,8 @@
     python3
 
     jdk
-    
+
+    nodejs_24
  ];
        
  # To launch apps without the toolbox app

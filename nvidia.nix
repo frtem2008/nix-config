@@ -15,7 +15,7 @@
       egl-wayland
       nvidia-vaapi-driver      
   ];
-
+  
   hardware.nvidia = {
 
     # Modesetting is required.
@@ -46,4 +46,11 @@
     # Optionally, you may need to select the appropriate driver version for your specific GPU.
     package = config.boot.kernelPackages.nvidiaPackages.production;
   };  
+
+  systemd.services."systemd-suspend" = {
+    serviceConfig = {
+      Environment=''"SYSTEMD_SLEEP_FREEZE_USER_SESSIONS=false"'';
+    };
+  };
+
 }

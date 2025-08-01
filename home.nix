@@ -84,6 +84,8 @@ in rec
     # with more details log output
     nix-output-monitor
 
+    wofi # Here because we need some config
+    
     # productivity
     glow # markdown previewer in terminal
 
@@ -162,6 +164,7 @@ in rec
       rdb = "sudo nixos-rebuild switch --show-trace --print-build-logs --verbose";
       e = "sudo nano /etc/nixos/*"; /* for now */
       logs = "journalctl -n 100 -f";
+      try = "nix-shell -p";
 #      urldecode = "python3 -c 'import sys, urllib.parse as ul; print(ul.unquote_plus(sys.stdin.read()))'";
 #      urlencode = "python3 -c 'import sys, urllib.parse as ul; print(ul.quote_plus(sys.stdin.read()))'";
 
@@ -173,6 +176,15 @@ in rec
     associations.added = associations;
     defaultApplications = associations;
   };
+
+  xdg.autostart = {
+    enable = true;
+    entries = [
+      "${pkgs.firefox}/share/applications/firefox.desktop"
+      "${pkgs.telegram-desktop}/share/applications/org.telegram.desktop.desktop"
+      "${pkgs.deltachat-desktop}/share/applications/deltachat.desktop"
+    ];
+  };
   
   # fonts.fontconfig.enable = true;
 
@@ -180,6 +192,63 @@ in rec
   wayland.windowManager.hyprland.enable = true; # enable Hyprland
   wayland.windowManager.hyprland.systemd.enable = false;
 
+  programs.wofi = {
+      enable = true;
+    style = ''
+      window {
+      margin: 0px;
+      border: 1px solid #bd93f9;
+      background-color: #282a36;
+      }
+
+      #input {
+      margin: 5px;
+      border: none;
+      color: #f8f8f2;
+      background-color: #44475a;
+      }
+
+      #inner-box {
+      margin: 5px;
+      border: none;
+      background-color: #282a36;
+      }
+
+      #outer-box {
+      margin: 5px;
+      border: none;
+      background-color: #282a36;
+      }
+
+      #scroll {
+      margin: 0px;
+      border: none;
+      }
+
+      #text {
+      margin: 5px;
+      border: none;
+      color: #f8f8f2;
+      } 
+
+      #entry.activatable #text {
+      color: #282a36;
+      }
+
+      #entry > * {
+      color: #f8f8f2;
+      }
+
+      #entry:selected {
+      background-color: #44475a;
+      }
+
+      #entry:selected #text {
+      font-weight: bold;
+      }
+    '';
+  };
+    
 #  home.file."${home.homeDirectory}/.config/hypr/hyprland.conf" = {
 #    source = ./hyprland/hyprland.conf;
 #  };

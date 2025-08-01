@@ -148,6 +148,9 @@
       vlc
       qimgv # Image viewer
 
+      sshfs
+      ffmpeg
+
       xdg-terminal-exec
             
       gparted 
@@ -170,19 +173,27 @@
       legendary-gl
       rare
 
-      # Merge diffs
-      meld
-            
+      meld # Merge diffs
+           
       hardinfo2
 
       undetected-chromedriver
       chromium
 
+      font-awesome
+
+      playerctl # for pause buttons on keyboard and handphones
+
+      mlocate # locate and so on
+
+      themechanger # GTK theme manager
+
       kdePackages.dolphin
       kdePackages.ark      
-      kdePackages.qtsvg # Dolphin svg icons support
-      kdePackages.kio-fuse #to mount remote filesystems via FUSE
-      kdePackages.kio-extras #extra protocols support (sftp, fish and more)
+      kdePackages.qtsvg            # Dolphin svg icons support
+      kdePackages.kio-fuse         # to mount remote filesystems via FUSE
+      kdePackages.kio-extras       # extra protocols support (sftp, fish and more)
+      kdePackages.plasma-workspace # File associations in dolphin open with window
       
       inputs.agenix.packages."${system}".default
       inputs.sddm-stray.packages.${pkgs.system}.default
@@ -206,7 +217,10 @@
 #    noto-fonts-emoji
 #    liberation_ttf  
 #   ];
-  
+
+  xdg.mime.enable = true;
+  xdg.menus.enable = true;  
+
   programs.nano.nanorc = ''
       set tabstospaces
       set tabsize 2
