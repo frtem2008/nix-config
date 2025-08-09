@@ -3,8 +3,8 @@
 {  
   programs.hyprland.enable = true; # enable Hyprland
   programs.hyprland.withUWSM  = true;
-
-#   programs.waybar.enable = true;
+  
+  # programs.waybar.enable = true;
   
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 

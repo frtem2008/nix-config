@@ -188,8 +188,15 @@
 
       themechanger # GTK theme manager
 
+      drawpile # Colloborative drawing
+
+      freecad
+
+      hydralauncher # Game launcher with built-in torrent client
+
       kdePackages.dolphin
       kdePackages.ark      
+      kdePackages.kate # text editor
       kdePackages.qtsvg            # Dolphin svg icons support
       kdePackages.kio-fuse         # to mount remote filesystems via FUSE
       kdePackages.kio-extras       # extra protocols support (sftp, fish and more)
@@ -235,7 +242,7 @@
   nix.gc = {
     automatic = true;
     dates = "weekly";
-    options = "--delete-older-than 7d";
+    options = "--delete-older-than 3d";
   };
   nix.settings.auto-optimise-store = true;
   

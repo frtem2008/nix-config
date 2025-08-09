@@ -163,6 +163,7 @@ in rec
       r = "sudo nixos-rebuild switch --flake /home/livefish/nixos-config#livefish-nix";
       rdb = "sudo nixos-rebuild switch --show-trace --print-build-logs --verbose";
       e = "sudo nano /etc/nixos/*"; /* for now */
+      u = "sudo nix flake update --flake /etc/nixos && r";
       logs = "journalctl -n 100 -f";
       try = "nix-shell -p";
 #      urldecode = "python3 -c 'import sys, urllib.parse as ul; print(ul.unquote_plus(sys.stdin.read()))'";
