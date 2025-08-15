@@ -68,7 +68,8 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.blacklistedKernelModules = [ "nouveau" ]; 
 
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  # Use LTS kernel because fuck nvidia
+  # boot.kernelPackages = pkgs.linuxPackages_latest;
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
@@ -89,7 +90,7 @@
 
   users.users.livefish = {
       isNormalUser = true;
-      extraGroups = [ "wheel" "video" "audio" "disk" "networkmanager" ];
+      extraGroups = [ "wheel" "video" "audio" "disk" "networkmanager" "dialout" ];
       home = "/home/livefish";
       createHome = true;
   };
@@ -193,6 +194,15 @@
       freecad
 
       hydralauncher # Game launcher with built-in torrent client
+
+      calc # Why haven't I added it before
+
+      arduino-ide
+
+      # Wine
+      wineWowPackages.staging
+      winetricks
+      wineWowPackages.waylandFull
 
       kdePackages.dolphin
       kdePackages.ark      
