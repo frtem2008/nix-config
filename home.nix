@@ -24,6 +24,10 @@ let
     "audio/mp4" = [ "vlc.desktop" ];
     "video/mp4" = [ "vlc.dekstop" ];
 
+    # Wine
+    "application/vnd.microsoft.portable-executable" = [ "wine.deskop" ];
+
+    
     "application/json" = browser; # ".json"  JSON format
     "application/pdf" = browser; # ".pdf"  Adobe Portable Document Format (PDF)
   };
@@ -112,6 +116,8 @@ in rec
     fluffychat
     deltachat-desktop
 
+    discord
+    
     zoom-us
   
     obs-studio    
@@ -144,6 +150,9 @@ in rec
     };
   };
 
+  # Headset button support
+  services.mpris-proxy.enable = true;
+
   programs.bash = {
     enable = true;
     enableCompletion = true;
@@ -174,7 +183,7 @@ in rec
 
   xdg.mimeApps = {
     enable = true;
-    associations.added = associations;
+    # associations.added = associations;
     defaultApplications = associations;
   };
 
@@ -183,7 +192,7 @@ in rec
     entries = [
       "${pkgs.firefox}/share/applications/firefox.desktop"
       "${pkgs.telegram-desktop}/share/applications/org.telegram.desktop.desktop"
-      "${pkgs.deltachat-desktop}/share/applications/deltachat.desktop"
+      # "${pkgs.deltachat-desktop}/share/applications/deltachat.desktop"
     ];
   };
   
@@ -248,7 +257,7 @@ in rec
       font-weight: bold;
       }
     '';
-  };
+  };  
     
 #  home.file."${home.homeDirectory}/.config/hypr/hyprland.conf" = {
 #    source = ./hyprland/hyprland.conf;

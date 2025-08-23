@@ -18,7 +18,7 @@
   services = {
     ntp.enable = true;
     openssh.enable = true;
-    blueman.enable = true;
+#   blueman.enable = true;
     udisks2.enable = true;
 #   kmscon.enable = true;
 #   dunst.enable = true;
@@ -94,6 +94,7 @@
       home = "/home/livefish";
       createHome = true;
   };
+  nix.settings.trusted-users = [ "root" "livefish" ]; # For devenv caches
 
   networking.firewall = {
     enable = false;
@@ -204,6 +205,20 @@
       winetricks
       wineWowPackages.waylandFull
 
+      openssl.dev
+
+      devenv
+
+      # FHS (https://discourse.nixos.org/t/tips-tricks-for-nixos-desktop/28488/2)
+      (let base = pkgs.appimageTools.defaultFhsEnvArgs; in 
+        pkgs.buildFHSEnv (base // {
+         name = "fhs";
+         targetPkgs = pkgs: (base.targetPkgs pkgs) ++ [pkgs.pkg-config]; 
+         profile = "export FHS=1"; 
+         runScript = "bash"; 
+         extraOutputsToInstall = ["dev"];
+        }))
+
       kdePackages.dolphin
       kdePackages.ark      
       kdePackages.kate # text editor
@@ -237,6 +252,12 @@
 
   xdg.mime.enable = true;
   xdg.menus.enable = true;  
+
+  systemd.services."systemd-suspend" = {
+    serviceConfig = {
+      Environment=''"SYSTEMD_SLEEP_FREEZE_USER_SESSIONS=false"'';
+    };
+  };
 
   programs.nano.nanorc = ''
       set tabstospaces
