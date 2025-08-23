@@ -67,7 +67,10 @@
 
   boot.loader.efi.canTouchEfiVariables = true;
   boot.blacklistedKernelModules = [ "nouveau" ]; 
-
+  boot.kernelParams = lib.mkDefault [
+    "mem_sleep_default=deep"
+    "nvidia.NVreg_EnableS0ixPowerManagement=1"
+  ];
   # Use LTS kernel because fuck nvidia
   # boot.kernelPackages = pkgs.linuxPackages_latest;
 
