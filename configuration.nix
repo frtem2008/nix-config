@@ -157,6 +157,7 @@
       ffmpeg
 
       xdg-terminal-exec
+      xdg-desktop-portal-gtk
             
       gparted 
       polkit
@@ -221,6 +222,9 @@
          runScript = "bash"; 
          extraOutputsToInstall = ["dev"];
         }))
+
+      virtualbox
+      quickemu
 
       kdePackages.dolphin
       kdePackages.ark      

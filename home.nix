@@ -119,7 +119,7 @@ in rec
     discord
     
     zoom-us
-  
+    
     obs-studio    
     yandex-music
     anydesk
@@ -258,7 +258,7 @@ in rec
       }
     '';
   };  
-    
+
 #  home.file."${home.homeDirectory}/.config/hypr/hyprland.conf" = {
 #    source = ./hyprland/hyprland.conf;
 #  };
