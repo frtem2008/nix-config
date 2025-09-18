@@ -23,6 +23,27 @@
 #   kmscon.enable = true;
 #   dunst.enable = true;
   };
+
+  services.avahi = {
+    enable = true;
+    nssmdns4 = true;
+    publish = {
+      enable = true;
+      addresses = true;
+      domain = true;
+      hinfo = true;
+      userServices = true;
+      workstation = true;
+    };
+  };
+
+  # Enable usb analysis through wireshark
+  services.udev = {
+    extraRules = ''
+      SUBSYSTEM=="usbmon", GROUP="wireshark", MODE="0640"
+    '';
+  };
+  
   security.polkit.enable = true;
 
   console.enable = true;
@@ -65,6 +86,10 @@
   programs.appimage.enable = true;
   programs.appimage.binfmt = true;
 
+  programs.kdeconnect.enable = true;
+
+  programs.wireshark.enable = true;
+  
   boot.loader.efi.canTouchEfiVariables = true;
   boot.blacklistedKernelModules = [ "nouveau" ]; 
   boot.kernelParams = lib.mkDefault [
@@ -93,7 +118,7 @@
 
   users.users.livefish = {
       isNormalUser = true;
-      extraGroups = [ "wheel" "video" "audio" "disk" "networkmanager" "dialout" ];
+      extraGroups = [ "wheel" "video" "audio" "disk" "networkmanager" "dialout" "wireshark"];
       home = "/home/livefish";
       createHome = true;
   };
@@ -106,6 +131,17 @@
       51821 # Wireguard
     ];
   };
+  
+#  networking.firewall = { 
+#    enable = true;
+#    allowedTCPPortRanges = [ 
+#      { from = 1714; to = 1764; } # KDE Connect
+#    ];  
+#    allowedUDPPortRanges = [ 
+#      { from = 1714; to = 1764; } # KDE Connect
+#    ];  
+#  };  
+
 #
 #  virtualisation.docker = {
 #    enable = true;
@@ -195,7 +231,7 @@
       themechanger # GTK theme manager
 
       drawpile # Colloborative drawing
-
+      
       freecad
 
       hydralauncher # Game launcher with built-in torrent client
@@ -226,6 +262,8 @@
       virtualbox
       quickemu
 
+      wayland-pipewire-idle-inhibit # Prevent suspend when audio is playing
+      
       kdePackages.dolphin
       kdePackages.ark      
       kdePackages.kate # text editor
@@ -233,7 +271,22 @@
       kdePackages.kio-fuse         # to mount remote filesystems via FUSE
       kdePackages.kio-extras       # extra protocols support (sftp, fish and more)
       kdePackages.plasma-workspace # File associations in dolphin open with window
-      
+      kdePackages.kdeconnect-kde   # Kde connect daemon
+
+      avahi
+  
+      # Hacker tools
+      nmap
+      wireshark
+      cyberchef
+      busybox  # telnet and so on
+
+      # Sqlite viewer
+      termdbms
+
+      # Db viewer
+      dbeaver-bin
+
       inputs.agenix.packages."${system}".default
       inputs.sddm-stray.packages.${pkgs.system}.default
       inputs.prismlauncher-cracked.packages."${system}".default
@@ -280,7 +333,7 @@
   nix.gc = {
     automatic = true;
     dates = "weekly";
-    options = "--delete-older-than 3d";
+    options = "--delete-older-than 30d";
   };
   nix.settings.auto-optimise-store = true;
   
