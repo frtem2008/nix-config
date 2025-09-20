@@ -39,6 +39,7 @@ in rec
 
   imports = [
     ./git
+    ./hyprland/hyprland.nix
   ];
 
   # Packages that should be installed to the user profile.

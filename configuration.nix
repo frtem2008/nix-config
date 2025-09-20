@@ -5,9 +5,7 @@
     [
       ./hardware-configuration.nix
       ./grub.nix
-      ./services.nix
       ./nvidia.nix
-      ./hyprland/hyprland.nix
       ./wireguard/wireguard.nix
       ./shadowsocks/shadowsocks.nix
       ./sddm/sddm.nix
@@ -74,6 +72,8 @@
     };
   };
 
+  programs.hyprland.enable = true; # enable Hyprland
+  programs.hyprland.withUWSM  = true;
 
   programs.amnezia-vpn.enable = true;
   programs.steam = {

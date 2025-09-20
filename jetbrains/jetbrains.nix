@@ -6,12 +6,15 @@
     icu # For Clion
  
     gcc
+    gdb
     ninja
     gnumake
+    cmake
+    cmakeCurses
+
+    valgrind
     
     go
-
-    # gRPC
     protobuf
     go-protobuf
     protoc-gen-go-grpc
