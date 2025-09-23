@@ -161,7 +161,7 @@
   environment.systemPackages = with pkgs; [
       vim
       wget
-      btop
+      btop-cuda # For gpu load support
       git
       firefox
       nix-prefetch-scripts
